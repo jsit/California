@@ -1,0 +1,481 @@
+/**
+ * California
+ * A style for the Textual IRC client
+ *
+ * https://github.com/Codeux-Software/Textual/
+ * https://www.codeux.com/textual/
+ *
+ * Loosely based on Simplified by Ben Alman (https://github.com/cowboy) and Michael
+ * (https://github.com/emsquared)
+ */
+
+/* Basic Body Structure */
+
+:root {
+  --background-color: #fff;
+  --text-color: inherit;
+  --color-green: -apple-system-green;
+  --color-red: -apple-system-red;
+  --border-color: #ccc;
+  --link-color: #0080FF;
+  --link-color-hover: #40A0FF;
+  --dim-text-color: #7c7e81;
+  --shaded-background-color: #d4d7dd; /* macOS UI color */
+  --shaded-background-text: #7c7e81; /* macOS UI color */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #222;
+    --text-color: #ddd;
+    --border-color: #444;
+    --dim-text-color: #666;
+    --shaded-background-color: #444;
+    --shaded-background-text: #bbb;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+body {
+  position: relative;
+  height: 100%;
+  z-index: 100;
+  overflow: hidden;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: -apple-system !important;
+}
+
+#body {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+/* Images */
+.inlineImage,
+.inlineVideo,
+.inlineVideoService,
+.inlineHTML {
+  .content {
+    display: inline-block;
+    float: left;
+    margin-inline-end: 12px;
+    margin-inline-start: 10px;
+    min-width: 40px;
+    max-width: 90%;
+  }
+
+  .closeButton {
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid #a1a1a1;
+    color: #a1a1a1;
+    display: inline-block;
+    line-height: 14px;
+    font-size: 0.9rem;
+    font-family: "Helvetica Neue" !important;
+    text-indent: 7px;
+    width: 16px;
+    height: 16px;
+    float: left;
+    padding-inline-end: 7px;
+    padding-inline-start: 0px;
+  }
+}
+
+/* Loading Screen */
+
+#loadingScreen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 300px;
+  font-size: 1.4rem;
+  background-color: var(--shaded-background-color);
+  color: var(--shaded-background-text);
+  border: 1px solid #333333;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+/* Time */
+
+.time {
+  font-size: 0.8rem;
+  color: var(--dim-text-color);
+  white-space: nowrap;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Encryption Lock */
+
+.encryptionLock img {
+  float: right;
+  margin: 0;
+  padding: 0;
+  height: 11px;
+  margin-top: 2px;
+  padding-inline-start: 10px;
+}
+
+/* Links */
+
+a {
+  color: var(--link-color);
+
+  &:hover {
+    color: var(--link-color-hover);
+  }
+}
+
+/* Topic Bar */
+
+#topicBar {
+  z-index: 400;
+  color: var(--shaded-background-text);
+  position: sticky;
+  top: 0;
+  padding: 2px 0.5em 3px;
+  background-color: var(--shaded-background-color);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  /* Topic bar hover additions contributed with permission from the project:
+  <https://github.com/hbang/Simplified-Light-Modifications> */
+  &:hover {
+    overflow: visible;
+    white-space: normal;
+  }
+
+  a,
+  span.channel {
+    color: inherit;
+  }
+}
+
+/* Remember Line */
+
+#mark {
+  clear: both;
+  position: relative;
+  z-index: 295;
+  margin-top: -1px;
+  border-bottom: 1px dashed;
+  border-color: #444;
+  -webkit-transition: 0.2s linear;
+}
+
+/* Message buffer loading animation */
+
+@keyframes ellipsis-period {
+  0% { opacity: 0.2; }
+  20% { opacity: 1.0; }
+  100% { opacity: 0.2; }
+}
+
+.message_buffer_loading_indicator {
+  text-align: center;
+  height: 42px;
+
+  span {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 5px;
+    line-height: 43px;
+    color: #5a5a5a;
+    -webkit-animation: ellipsis-period 1.5s infinite;
+    animation: ellipsis-period 1.5s infinite;
+
+    &:nth-child(1) {
+      -webkit-animation-delay: 0.0s;
+      animation-delay: 0.0s;
+    }
+
+    &:nth-child(2) {
+      -webkit-animation-delay: 0.1s;
+      animation-delay: 0.1s;
+    }
+
+    &:nth-child(3) {
+      -webkit-animation-delay: 0.2s;
+      animation-delay: 0.2s;
+    }
+  }
+}
+
+/* Message buffer session indicator */
+
+.date_indicator ,
+.session_indicator {
+  display: flex;
+  display: -webkit-flex;
+  padding: 0.5em 0;
+  font-size: 0.8rem;
+
+  > hr {
+    background-color: var(--border-color);
+    border: 0;
+    height: 1px;
+    margin-top: 0.6em;
+    flex: 1;
+    -webkit-flex: 1;
+  }
+
+  > span {
+    font-style: italic;
+    margin: 0 1em;
+    color: var(--dim-text-color);
+  }
+
+  + #mark {
+    display: none;
+  }
+}
+
+div.line {
+  clear: both;
+
+  > p {
+    display: flex;
+    column-gap: 0.5ch;
+    align-items: baseline;
+  }
+}
+
+/* NOTICE/CTCP/WALLOPS */
+
+div.line:is([data-line-type="ctcp"], [data-line-type="notice"], [data-line-type="wallops"]) {
+  color: var(--color-red);
+  z-index: 191;
+  background: #400;
+  position: relative;
+  padding: 2px 5px;
+  border-width: 1px 0;
+  border-style: solid;
+  border-color: var(--border-color);
+
+  & + & {
+    border-top-color: transparent;
+  }
+
+  .sender {
+    color: var(--color-red);
+    font-weight: 700;
+  }
+}
+
+/* Selected User Messages */
+
+.sender {
+  cursor: pointer;
+}
+
+div.line:is([data-line-type="privmsg"], [data-line-type="action"]) {
+  &:not(.selectedUser) {
+    transition-property: border-top, border-bottom, background-color;
+    transition-duration: 0.5s, 0.5s, 0.5s;
+
+    .time {
+      transition: color 0.5s;
+    }
+  }
+}
+
+div.line.selectedUser[data-highlight="false"] {
+  transition-property: border-top, border-bottom, background-color;
+  transition-duration: 0.5s, 0.5s, 0.5s;
+  z-index: 190;
+  position: relative;
+  border-color: #02577C !important;
+  background-color: rgba(3, 134, 212, 0.25) !important;
+
+  .time {
+    transition: color 0.5s ease-in;
+    color: #aaa;
+  }
+}
+
+/* PRIVMSG */
+
+div.line[data-line-type="privmsg"] {
+  padding: 2px 5px;
+  border-width: 1px 0;
+  border-style: solid;
+  border-color: transparent;
+  background-color: none;
+
+  .message {
+    color: inherit;
+  }
+
+  .sender {
+    font-weight: 700;
+    white-space: pre-wrap;
+
+    &[data-member-type="myself"] {
+      color: #B8DFFF;
+    }
+  }
+}
+
+div.line:is([data-line-type="privmsg"], [data-line-type="action"])[data-highlight="true"] {
+  z-index: 191;
+  position: relative;
+  font-weight: normal;
+  padding: 2px 5px;
+  border-color: #988C00;
+  background-color: #362C00 !important;
+}
+
+/* ACTION */
+
+div.line[data-line-type="action"] {
+  padding: 2px 5px;
+  border: 0 solid transparent;
+  border-width: 1px 0;
+  background-color: none;
+
+  .sender {
+    font-weight: 700;
+
+    &::before {
+      content: "\2022";
+      margin-inline-end: 0.4em;
+    }
+  }
+
+  .message {
+    color: var(--dim-text-color);
+  }
+
+  &[data-member-type="myself"] {
+    .message, .sender {
+      color: #B52CF6;
+    }
+  }
+}
+
+/* DEBUG/INVITE */
+
+div.line:is(
+  [data-line-type="invite"],
+  [data-line-type="debug"],
+  [data-line-type="dcc-file-transfer"],
+  [data-line-type="off-the-record-encryption-status"]
+) {
+  color: #777;
+  z-index: 190;
+  position: relative;
+  padding: 2px 5px 3px;
+  border: 0 solid var(--border-color);
+  border-width: 1px 0;
+
+  & + & {
+    border-top-color: transparent;
+  }
+
+  &:first-child {
+    border-top: none;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+/* off-the-record-encryption-status Message Event */
+div.line[data-line-type="off-the-record-encryption-status"] .message {
+  color: #ff0000;
+  font-weight: 700;
+}
+
+/* Message of the Day (MOTD) */
+/* 720, 721, 722 are used by ShadowIRCd for Oper MOTD. */
+/* 372, 375, 376 are normal MOTD shared by several IRCds. */
+
+div.line:is([data-command="372"], [data-command="721"]) {
+  border: none;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+/* Start */
+div.line:is([data-command="375"], [data-command="720"]) {
+  border-bottom: none;
+  padding-top: 2px;
+  padding-bottom: 3px;
+}
+
+/* End */
+div.line:is([data-command="376"], [data-command="722"]) {
+  border-top: none;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+div.line:is(
+  [data-command="372"],
+  [data-command="375"],
+  [data-command="376"],
+  [data-command="720"],
+  [data-command="721"],
+  [data-command="722"]
+) .message {
+  font-family: monospace !important;
+}
+
+/* GENERAL EVENT */
+
+div.line:is(
+  [data-line-type="join"],
+  [data-line-type="part"],
+  [data-line-type="kick"],
+  [data-line-type="quit"],
+  [data-line-type="kill"],
+  [data-line-type="nick"],
+  [data-line-type="mode"],
+  [data-line-type="topic"],
+  [data-line-type="website"]
+) {
+  padding: 3px 5px;
+  color: var(--dim-text-color);
+}
+
+div.line[data-line-type="join"] .message::before {
+  content: "→";
+  color: var(--color-green);
+}
+
+body[dir="rtl"] div.line[data-line-type="join"] .message::before {
+  content: "←";
+}
+
+div.line:is([data-line-type="kick"], [data-line-type="part"], [data-line-type="quit"]) .message::before {
+  content: "←";
+  color: var(--color-red);
+}
+
+body[dir="rtl"] div.line:is([data-line-type="kick"], [data-line-type="part"], [data-line-type="quit"]) .message::before {
+  content: "←";
+}
+
+div.line[data-line-type="nick"] .message::before {
+  content:"•";
+  color: var(--color-green);
+}
+
+/* Nickname Colors */
+
+.inlineSender {
+  font-weight: 700;
+}
