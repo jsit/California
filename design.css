@@ -326,7 +326,7 @@ div.line:is([data-line-type="privmsg"], [data-line-type="action"])[data-highligh
   font-weight: normal;
   padding: 2px 5px;
   border-color: #988C00;
-  background-color: #362C00 !important;
+  background-color: var(--shaded-background-color) !important;
 }
 
 /* ACTION */
