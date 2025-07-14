@@ -46,7 +46,6 @@
 body {
   position: relative;
   height: 100%;
-  z-index: 100;
   overflow: hidden;
   background-color: var(--background-color);
   color: var(--text-color);
@@ -157,7 +156,7 @@ a {
 #mark {
   clear: both;
   position: relative;
-  z-index: 295;
+  z-index: 1;
   margin-top: -1px;
   border-bottom: 1px dashed;
   border-color: #444;
@@ -245,7 +244,7 @@ div.line {
 
 div.line:is([data-line-type="ctcp"], [data-line-type="notice"], [data-line-type="wallops"]) {
   color: var(--color-red);
-  z-index: 191;
+  z-index: 1;
   background: #400;
   position: relative;
   padding: 2px 5px;
@@ -283,7 +282,7 @@ div.line:is([data-line-type="privmsg"], [data-line-type="action"]) {
 div.line.selectedUser[data-highlight="false"] {
   transition-property: border-top, border-bottom, background-color;
   transition-duration: 0.5s, 0.5s, 0.5s;
-  z-index: 190;
+  z-index: 1;
   position: relative;
   border-color: #02577C !important;
   background-color: rgba(3, 134, 212, 0.25) !important;
@@ -318,7 +317,7 @@ div.line[data-line-type="privmsg"] {
 }
 
 div.line:is([data-line-type="privmsg"], [data-line-type="action"])[data-highlight="true"] {
-  z-index: 191;
+  z-index: 1;
   position: relative;
   font-weight: normal;
   padding: 2px 5px;
@@ -363,7 +362,7 @@ div.line:is(
   [data-line-type="off-the-record-encryption-status"]
 ) {
   color: #777;
-  z-index: 190;
+  z-index: 1;
   position: relative;
   padding: 2px 5px 3px;
   border: 0 solid var(--border-color);
