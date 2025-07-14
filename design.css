@@ -58,7 +58,6 @@ body {
   overflow-y: auto;
 }
 
-/* Images */
 .inlineImage,
 .inlineVideo,
 .inlineVideoService,
@@ -90,8 +89,6 @@ body {
   }
 }
 
-/* Loading Screen */
-
 #loadingScreen {
   position: absolute;
   top: 50%;
@@ -106,8 +103,6 @@ body {
   padding: 5px 10px;
 }
 
-/* Time */
-
 .time {
   font-size: 0.8rem;
   color: var(--dim-text-color);
@@ -115,8 +110,6 @@ body {
   display: inline-block;
   font-variant-numeric: tabular-nums;
 }
-
-/* Encryption Lock */
 
 .encryptionLock img {
   float: right;
@@ -127,8 +120,6 @@ body {
   padding-inline-start: 10px;
 }
 
-/* Links */
-
 a {
   color: var(--link-color);
 
@@ -136,8 +127,6 @@ a {
     color: var(--link-color-hover);
   }
 }
-
-/* Topic Bar */
 
 #topicBar {
   z-index: 400;
