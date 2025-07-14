@@ -240,6 +240,14 @@ div.line {
   }
 }
 
+.sender {
+  cursor: pointer;
+}
+
+.inlineSender {
+  font-weight: 700;
+}
+
 /* NOTICE/CTCP/WALLOPS */
 
 div.line:is([data-line-type="ctcp"], [data-line-type="notice"], [data-line-type="wallops"]) {
@@ -263,10 +271,6 @@ div.line:is([data-line-type="ctcp"], [data-line-type="notice"], [data-line-type=
 }
 
 /* Selected User Messages */
-
-.sender {
-  cursor: pointer;
-}
 
 div.line:is([data-line-type="privmsg"], [data-line-type="action"]) {
   &:not(.selectedUser) {
@@ -460,10 +464,4 @@ body[dir="rtl"] div.line:is([data-line-type="kick"], [data-line-type="part"], [d
 div.line[data-line-type="nick"] .message::before {
   content:"•";
   color: var(--color-green);
-}
-
-/* Nickname Colors */
-
-.inlineSender {
-  font-weight: 700;
 }
